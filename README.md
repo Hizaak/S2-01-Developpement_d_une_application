@@ -2,10 +2,13 @@
 Dépôt créé à l'occasion de la S2.01 pour assurer la collaborations entre ses différents membres et l'envoi des versions du dossier d'analyse et de conception aux professeurs.
 
 # Qui sommes-nous ?
+
+Étudiants en B.U.T. Informatique, semestre 2, 2022.
+
 - Guillaume TRITSCH
 - Nicolas DARGAZANLI
 - Alexandre MAURICE
-B.U.T. Informatique, semestre 2, 2022.
+
 Tous trois en TD I TP 1.
 
 # Fonctionnement
