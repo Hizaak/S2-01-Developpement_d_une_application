@@ -17,7 +17,7 @@ Le développement de l'application se fait de manière linéaire avec la ligne d
 vX, X représentant le n° de la version, ainsi que d'une description de cette version.
  Dans le répertoire ```chifoumi``` sont contenus l'ensemble des fichiers source (à l'exception du ``.pro.user``).
  
-La dernière version du dossier d’analyseEtConception de l’équipe sera déposée sur eLearn, dans la section associée à cette saé.
+La dernière version du dossier d’analyse et de conception de l’équipe sera déposée sur eLearn, dans la section associée à cette S.A.É. .
 
 Lien vers le dépôt Github : https://github.com/Hizaak/S2-01-Developpement_d_une_application
 
