@@ -15,7 +15,9 @@ Tous trois en TD I TP 1.
 
 # Fonctionnement
 
-Le développement de l'application se fait de manière linéaire avec la ligne de vie du Git, mais chaque version "finalisée" fera l'objet d'un *commit* ayant pour *TAG* : v$x$, $x$ représentant le n° de la version, ainsi que d'une description de cette version.
+Le développement de l'application se fait de manière linéaire avec la ligne de vie du Git, mais chaque version "finalisée" fera l'objet d'un *commit* ayant pour *TAG* : 
+$x$
+, $x$ représentant le n° de la version, ainsi que d'une description de cette version.
  Dans le répertoire ```chifoumi``` sont contenus l'ensemble des fichiers source (à l'exception du ``.pro.user``.
  
 La dernière version du dossier d’analyseEtConception de l’équipe sera déposée sur eLearn, dans la section associée à cette saé.
