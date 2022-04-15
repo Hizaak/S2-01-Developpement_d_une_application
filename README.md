@@ -1,9 +1,7 @@
-\usepackage{latex}
-
 # S2-01-Developpement_d_une_application
 Dépôt créé à l'occasion de la S2.01 pour assurer la collaborations entre ses différents membres et l'envoi des versions du dossier d'analyse et de conception aux professeurs.
 
-# Qui sommes-nous ?
+## Qui sommes-nous ?
 
 Étudiants en B.U.T. Informatique, semestre 2, 2022.
 
@@ -13,12 +11,24 @@ Dépôt créé à l'occasion de la S2.01 pour assurer la collaborations entre se
 
 Tous trois en TD I TP 1.
 
-# Fonctionnement
+## Fonctionnement
 
 Le développement de l'application se fait de manière linéaire avec la ligne de vie du Git, mais chaque version "finalisée" fera l'objet d'un *commit* ayant pour *TAG* : 
 vX, X représentant le n° de la version, ainsi que d'une description de cette version.
- Dans le répertoire ```chifoumi``` sont contenus l'ensemble des fichiers source (à l'exception du ``.pro.user``.
+ Dans le répertoire ```chifoumi``` sont contenus l'ensemble des fichiers source (à l'exception du ``.pro.user``).
  
 La dernière version du dossier d’analyseEtConception de l’équipe sera déposée sur eLearn, dans la section associée à cette saé.
 
 Lien vers le dépôt Github : https://github.com/Hizaak/S2-01-Developpement_d_une_application
+
+## Sommaire
+- Lien du commit vers la v0 :
+- Lien du commit vers la v1 :
+- Lien du commit vers la v2 :
+- Lien du commit vers la v3 :
+- Lien du commit vers la v4 :
+- Lien du commit vers la v5 :
+- Lien du commit vers la v6 :
+- Lien du commit vers la v7 :
+- Lien du commit vers la v8 :
+- Lien du commit vers la v9 :
