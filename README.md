@@ -22,13 +22,13 @@ La dernière version du dossier d’analyse et de conception de l’équipe sera
 Lien vers le dépôt Github : https://github.com/Hizaak/S2-01-Developpement_d_une_application
 
 ## Sommaire
-- Lien du commit vers la v0 : Pas encore publié
-- Lien du commit vers la v1 : Pas encore publié
-- Lien du commit vers la v2 : Pas encore publié
-- Lien du commit vers la v3 : Pas encore publié
-- Lien du commit vers la v4 : Pas encore publié
-- Lien du commit vers la v5 : Pas encore publié
-- Lien du commit vers la v6 : Pas encore publié
-- Lien du commit vers la v7 : Pas encore publié
-- Lien du commit vers la v8 : Pas encore publié
-- Lien du commit vers la v9 : Pas encore publié
+- Sha du commit vers la v0 : 4123a6eb1393f5e1d89a3bab5cce075e4209a6f8
+- Sha du commit vers la v1 : Pas encore publié
+- Sha du commit vers la v2 : Pas encore publié
+- Sha du commit vers la v3 : Pas encore publié
+- Sha du commit vers la v4 : Pas encore publié
+- Sha du commit vers la v5 : Pas encore publié
+- Sha du commit vers la v6 : Pas encore publié
+- Sha du commit vers la v7 : Pas encore publié
+- Sha du commit vers la v8 : Pas encore publié
+- Sha du commit vers la v9 : Pas encore publié
