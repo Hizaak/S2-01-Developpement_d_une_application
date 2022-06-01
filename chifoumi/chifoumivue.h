@@ -52,6 +52,7 @@ private slots:
      * BUT: Deroule un tour avec comme choix du joueur la figure papier.
      */
 
+    void actionAPropos() ;
 
 
 private:
