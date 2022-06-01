@@ -5,6 +5,7 @@
 #include <QPixmap>
 #include <iostream>
 #include <QDebug>
+#include <QMessageBox>
 
 using namespace std;
 
@@ -30,6 +31,9 @@ ChifoumiVue::ChifoumiVue(Presentation *p, QWidget *parent)
     connect(ui->boutonPapier, SIGNAL(clicked()), this, SLOT(jouerPapier()));
     connect(ui->boutonPierre, SIGNAL(clicked()), this, SLOT(jouerPierre()));
     connect(ui->boutonRejouer, SIGNAL(clicked()), this, SLOT(reinitialiser()));
+
+    connect(ui->action_Quitter, SIGNAL(triggered()), QApplication::instance(), SLOT(quit()));
+    connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(actionAPropos()));
 
     ui->boutonRejouer->setFocus();
 
@@ -66,6 +70,12 @@ void ChifoumiVue::MAJInterface(char joueurGagnant,
 
 /// ================== SLOTS PRIVEE ==================
 
+void ChifoumiVue::actionAPropos() {
+    QMessageBox fenAPropos;
+    fenAPropos.setWindowTitle("À propos");
+    fenAPropos.setText("Version v3 du 24/05/2022\n\nFait par :\nAlexandre Maurice\nNicolas Dargazanli\nGuillaume Tritsch");
+    fenAPropos.exec();
+}
 
 void ChifoumiVue::jouerPierre() {
     _laPresentation->deroulerUnTour(Chifoumi::UnCoup::pierre);
@@ -168,4 +178,3 @@ QPixmap ChifoumiVue::pixmapDeCoup(Chifoumi::UnCoup coup) {
 
     return ressource;
 }
-
