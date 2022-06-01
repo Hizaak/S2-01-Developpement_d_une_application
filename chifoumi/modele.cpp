@@ -4,7 +4,7 @@
  * Created:   2021-05-10
  * Description : classe métier (= modèle) Chifoumi-v1
  **************************************************************/
-#include "chifoumi.h"
+#include "modele.h"
 
 #include <cstdlib>
 #include <ctime>
