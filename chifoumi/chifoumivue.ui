@@ -1,0 +1,882 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ChifoumiVue</class>
+ <widget class="QMainWindow" name="ChifoumiVue">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>868</width>
+    <height>548</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>457</width>
+    <height>496</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>ChifoumiVue</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+background-color: rgb(243, 255, 233);
+}
+
+/* =====  Droite ===== */
+
+/* Couleur normal */
+
+#frameJDroit{
+	background-color: rgb(173, 185, 133);
+	border-radius: 10px;
+}
+
+#imageJDroit {
+	margin-left: 7px;
+	margin-right: 7px;
+	margin-bottom: 7px;
+}
+
+#labelPointJDroit {
+	background-color: rgb(133, 145, 93);
+	border-radius: 10px;
+	color: white;
+	font: 87 12pt &quot;Segoe UI Black&quot;;
+	padding-left: 7px; padding-right: 7px;
+}
+
+#labelJDroit {
+	background-color: rgb(73, 85, 33);
+	border-radius: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	color: white;
+	font: 87 12pt &quot;Segoe UI Black&quot;;
+}
+
+/* Couleur victoire */
+
+#frameJDroit[victoire=true]{
+	background-color: #35CFCA;
+}
+
+
+#labelPointJDroit[victoire=true] {
+	background-color: #58A8A6;
+	border-radius: 10px;
+	color: white;
+	font: 87 12pt &quot;Segoe UI Black&quot;;
+}
+
+#labelJDroit[victoire=true] {
+	background-color: #10928E;
+	border-radius: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	color: white;
+	font: 87 12pt &quot;Segoe UI Black&quot;;
+}
+
+/* Couleur non victoire */
+
+#frameJDroit[victoire=false]{
+	background-color: #D97D55;
+}
+
+
+#labelPointJDroit[victoire=false] {
+	background-color: #855642;
+	border-radius: 10px;
+	color: white;
+	font: 87 12pt &quot;Segoe UI Black&quot;;
+}
+
+#labelJDroit[victoire=false] {
+	background-color: #873A19;
+	border-radius: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	color: white;
+	font: 87 12pt &quot;Segoe UI Black&quot;;
+}
+
+/* Gauche */
+
+#frameJGauche {
+background-color: rgb(173, 185, 133);
+border-radius: 10px;
+}
+
+#imageJGauche {
+margin-left: 7px;
+margin-right: 7px;
+margin-bottom: 7px;
+}
+
+#labelPointJGauche {
+background-color: rgb(133, 145, 93);
+border-radius: 10px;
+color: white;
+font: 87 12pt &quot;Segoe UI Black&quot;;
+padding-left: 7px; padding-right: 7px;
+}
+
+#labelJGauche {
+background-color: rgb(73, 85, 33);
+border-radius: 10px;
+padding-left: 30px;
+padding-right: 30px;
+padding-top: 10px;
+padding-bottom: 10px;
+
+color: white;
+font: 87 12pt &quot;Segoe UI Black&quot;;
+}
+
+/* Couleur victoire */
+
+#frameJGauche[victoire=true]{
+	background-color: #35CFCA;
+}
+
+
+#labelPointJGauche[victoire=true] {
+	background-color: #58A8A6;
+	border-radius: 10px;
+	color: white;
+	font: 87 12pt &quot;Segoe UI Black&quot;;
+}
+
+#labelJGauche[victoire=true] {
+	background-color: #10928E;
+	border-radius: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	color: white;
+	font: 87 12pt &quot;Segoe UI Black&quot;;
+}
+
+/* Couleur non victoire */
+
+#frameJGauche[victoire=false]{
+	background-color: #D97D55;
+}
+
+
+#labelPointJGauche[victoire=false] {
+	background-color: #855642;
+	border-radius: 10px;
+	color: white;
+	font: 87 12pt &quot;Segoe UI Black&quot;;
+}
+
+#labelJGauche[victoire=false] {
+	background-color: #873A19;
+	border-radius: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	color: white;
+	font: 87 12pt &quot;Segoe UI Black&quot;;
+}
+
+/* Centrale */
+
+#frameJGagnant {
+background-color: rgb(173, 185, 133);
+border-radius: 10px;
+}
+
+#labelGagnant {
+background-color: rgb(73, 85, 33);
+color: white;
+border-radius: 10px;
+padding-left: 30px;
+padding-right: 30px;
+padding-top: 10px;
+padding-bottom: 10px;
+
+font: 87 12pt &quot;Segoe UI Black&quot;;
+}
+
+#labelInfoJGagnant {
+background-color: rgb(133, 145, 93);
+border-radius: 10px;
+padding: 7px;
+
+color: white;
+font: 87 12pt &quot;Segoe UI Black&quot;;
+}
+
+#imageCDroit {
+}
+
+#imageCDroit  {
+}
+
+/**/
+
+#boutonPapier {
+margin-left: 10px;
+margin-right: 10px;
+}
+
+#boutonRejouer {
+color: white;
+
+	font: 10pt &quot;Segoe UI Emoji&quot;;
+}
+
+QPushButton {
+background-color: rgb(73, 85, 33);
+border-radius: 10px;
+padding-left: 10px;
+padding-right: 10px;
+padding-top: 10px;
+padding-bottom: 10px;
+
+border: 2px solid rgb(23, 35, 03); 
+}
+
+#frameSelect {
+background-color: rgb(173, 185, 133);
+border-radius: 10px;
+
+color: white;
+
+	font: 10pt &quot;Segoe UI Emoji&quot;;
+}
+
+QPushButton:hover {
+background-color: rgb(123, 135, 83);
+}
+
+QPushButton:pressed {
+background-color: rgb(193, 205, 163);
+}
+
+QPushButton:focus {
+border: 2px solid red; 
+outline: 0;
+}
+
+QPushButton:disabled {
+background-color: rgb(190, 190, 190);
+border: 2px solid grey; 
+outline: 0;
+}
+
+#labelTitre {
+background-color: rgb(73, 85, 33);
+border-radius: 10px;
+padding-left: 10px;
+padding-right: 10px;
+padding-top: 10px;
+padding-bottom: 10px;
+
+color: white;
+font: 10pt &quot;Segoe UI Emoji&quot;;
+}
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="layoutHPrincipaleSup">
+      <item>
+       <widget class="QFrame" name="frameJGauche">
+        <property name="minimumSize">
+         <size>
+          <width>142</width>
+          <height>219</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>142</width>
+          <height>219</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="labelJGauche">
+           <property name="text">
+            <string>Joueur</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="layoutHScoreJ">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <spacer name="horizontalSpacer_5">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QLabel" name="labelPointJGauche">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>999</width>
+               <height>999</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>0</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_6">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="imageJGauche">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>142</width>
+             <height>134</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>142</width>
+             <height>134</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="images/images.qrc">:/png/rien_115.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QFrame" name="frameJGagnant">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>75</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="labelGagnant">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>999</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Gagnant</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="labelInfoJGagnant">
+           <property name="minimumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>500</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Aucun</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QFrame" name="frameJDroit">
+        <property name="minimumSize">
+         <size>
+          <width>142</width>
+          <height>219</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>142</width>
+          <height>219</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="labelJDroit">
+           <property name="text">
+            <string>Machine</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="layoutHScoreM">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item>
+            <spacer name="horizontalSpacer_7">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QLabel" name="labelPointJDroit">
+             <property name="minimumSize">
+              <size>
+               <width>30</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>999</width>
+               <height>999</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>0</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_8">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="imageJDroit">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>142</width>
+             <height>134</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>142</width>
+             <height>134</height>
+            </size>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="pixmap">
+            <pixmap resource="images/images.qrc">:/png/rien_115.png</pixmap>
+           </property>
+           <property name="scaledContents">
+            <bool>true</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QFrame" name="frameSelect">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>174</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="labelTitre">
+         <property name="text">
+          <string>Choisissez une figure</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="layoutHChoixFigure">
+         <property name="leftMargin">
+          <number>6</number>
+         </property>
+         <property name="topMargin">
+          <number>6</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>6</number>
+         </property>
+         <item>
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="boutonPierre">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="images/images.qrc">
+             <normaloff>:/png/pierre_115.png</normaloff>:/png/pierre_115.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>100</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="shortcut">
+            <string>Ctrl+P</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="boutonPapier">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="images/images.qrc">
+             <normaloff>:/png/papier_115.png</normaloff>:/png/papier_115.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>100</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="shortcut">
+            <string>Ctrl+F</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="boutonCiseau">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="images/images.qrc">
+             <normaloff>:/png/ciseau_115.png</normaloff>:/png/ciseau_115.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>100</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="shortcut">
+            <string>Ctrl+C</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="layoutHRejouer">
+      <item>
+       <widget class="QPushButton" name="boutonRejouer">
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>150</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>&amp;Lancer la partie</string>
+        </property>
+        <property name="shortcut">
+         <string>Ctrl+N</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>868</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="images/images.qrc"/>
+ </resources>
+ <connections/>
+</ui>
