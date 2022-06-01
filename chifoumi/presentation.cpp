@@ -31,7 +31,8 @@ void Presentation::reinitialiser() {
     _leModele->initCoups();
     _leModele->initScores();
 
-    _laVue->MAJInterface(_leModele->determinerGagnant(),
+    _laVue->MAJInterface(verificationFinPartie(),
+                         _leModele->determinerGagnant(),
                          _leModele->getCoupJoueur(),
                          _leModele->getCoupMachine(),
                          _leModele->getScoreJoueur(),
@@ -45,12 +46,25 @@ void Presentation::deroulerUnTour(Chifoumi::UnCoup coupJoueur) {
     // MAJ des scores
     _leModele->majScores(_leModele->determinerGagnant());
 
-    _laVue->MAJInterface(_leModele->determinerGagnant(),
+
+    _laVue->MAJInterface(verificationFinPartie(),
+                         _leModele->determinerGagnant(),
                          _leModele->getCoupJoueur(),
                          _leModele->getCoupMachine(),
                          _leModele->getScoreJoueur(),
                          _leModele->getScoreMachine());
 }
 
+
+
+char Presentation::verificationFinPartie(){
+    if (_leModele->getScoreJoueur() == pointMax) {
+        return 'J';
+    } else if (_leModele->getScoreMachine() == pointMax){
+        return 'M';
+    } else {
+        return 'N';
+    }
+}
 
 
