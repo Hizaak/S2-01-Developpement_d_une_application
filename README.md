@@ -23,9 +23,9 @@ Lien vers le dépôt Github : https://github.com/Hizaak/S2-01-Developpement_d_un
 
 ## Sommaire
 - Sha du commit vers la v0 : 4123a6eb1393f5e1d89a3bab5cce075e4209a6f8
-- Sha du commit vers la v1 : Pas encore publié
-- Sha du commit vers la v2 : Pas encore publié
-- Sha du commit vers la v3 : Pas encore publié
+- Sha du commit vers la v1 : e910a7a3e9b3c9b7d70a4cbbc5c253d56af4c72c
+- Sha du commit vers la v2 : 14f05b834d65795f006be81d76c278c2cf2ecbe2
+- Sha du commit vers la v3 : dbd500d3ed4777927318f1afbee096b2923c95c1
 - Sha du commit vers la v4 : Pas encore publié
 - Sha du commit vers la v5 : Pas encore publié
 - Sha du commit vers la v6 : Pas encore publié
