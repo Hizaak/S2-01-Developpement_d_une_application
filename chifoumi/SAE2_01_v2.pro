@@ -9,13 +9,15 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    chifoumi.cpp \
     main.cpp \
-    chifoumivue.cpp
+    chifoumivue.cpp \
+    modele.cpp \
+    presentation.cpp
 
 HEADERS += \
-    chifoumi.h \
-    chifoumivue.h
+    chifoumivue.h \
+    modele.h \
+    presentation.h
 
 FORMS += \
     chifoumivue.ui

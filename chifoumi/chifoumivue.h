@@ -2,12 +2,13 @@
 #define CHIFOUMIVUE_H
 
 #include <QMainWindow>
-#include "chifoumi.h"
+#include "modele.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class ChifoumiVue; }
 QT_END_NAMESPACE
 
+class Presentation;
 class ChifoumiVue : public QMainWindow
 {
     Q_OBJECT
@@ -15,8 +16,20 @@ class ChifoumiVue : public QMainWindow
     ///* Une définition de type énuméré
 
 public:
-    ChifoumiVue(Chifoumi *m, QWidget *parent = nullptr);
+    ChifoumiVue(Presentation *p, QWidget *parent = nullptr);
     ~ChifoumiVue();
+
+    // METHODES
+
+    void MAJInterface(char joueurGagnant,
+                      Chifoumi::UnCoup coupJGauche,
+                      Chifoumi::UnCoup coupJDroit,
+                      unsigned int scoreJGauche,
+                      unsigned int scoreJDroit);
+
+    Presentation *getPresentation();
+
+    void setPresentation (Presentation *p);
 
 private slots:
     void reinitialiser();
@@ -42,60 +55,42 @@ private slots:
 
 
 private:
+
     // NOUVEAUX TYPES
     enum EtatsJeu {attenteLancementPartie, attenteCoupJoueur};
 
     // ATTRIBUTS
     Ui::ChifoumiVue *ui;
 
+    Presentation *_laPresentation;
+
     QPixmap ressourcePierre = QPixmap(":png/pierre_115"); // ressource de l'image de la pierre
     QPixmap ressourceCiseau = QPixmap(":png/ciseau_115"); // ressource de l'image du ciseau
     QPixmap ressourcePapier = QPixmap(":png/papier_115"); // ressource de l'image du papier
     QPixmap ressourceRien = QPixmap(":png/rien_115");     // ressource de l'image de rien
 
-    Chifoumi* partieDeChifoumi; // partie de chifoumi
     EtatsJeu etatDuJeu; // état du jeu
 
     // METHODES
-    void choixJoueur(Chifoumi::UnCoup /* Coup du joueur*/);
+
+    void afficherGagnant(char joueurGagnant);
     /*
-     * BUT: Procedure qui affecte la valeur UnCoup à la classe Chifoumi et affiche l'image correspondante sur la fenetre.
+     * BUT: Affiche au centre de l'écran le gagnant du precedent tour.
      */
 
-    void choixMachine();
+    void afficherPoint(unsigned int jGauche, unsigned int jDroit);
     /*
-     * BUT: Procedure qui genere UnCoup et l'affecte à la classe Chifoumi et affiche l'image correspondante sur la fenetre.
+     * BUT: met à jour les points à l'affichage.
      */
 
-    void determinerEtAfficherGagnant();
+    void afficherCoup(Chifoumi::UnCoup coupJGauche, Chifoumi::UnCoup coupJDroit);
     /*
-     * BUT: Determine le gagnant, et met à jour les points.
-     *      Puis affiche les points, le gagnant et met à jour les couleurs.
+     * BUT: affiche les coups de chaques joueurs.
      */
 
-    void deroulerUnTour(Chifoumi::UnCoup /* Coup du joueur*/);
+    void majCouleur(QString propJGauche, QString propJDroit);
     /*
-     * BUT: deroule un tour en fonction du parametre UnCoup du joueur, et met à jour la fenetre en fonction du resultat du tour.
-     */
-
-    void afficherPoint();
-    /*
-     * BUT: met à jour les points à l'affichage
-     */
-
-    void styleSheetMAJ();
-    /*
-     * BUT: met à jour la feuille de style.
-     */
-
-    void majCouleurGauche(QString);
-    /*
-     * BUT: modification de la propriété de chaque element du joueur gauche avec le QString passé en parametre.
-     */
-
-    void majCouleurDroit(QString);
-    /*
-     * BUT: modification de la propriété de chaque element du joueur droit avec le QString passé en parametre.
+     * BUT: modification de la propriété de chaque elements graphiques des joueurs avec le QString passé en parametre.
      */
 
     QPixmap pixmapDeCoup(Chifoumi::UnCoup);
