@@ -27,6 +27,11 @@ public:
     void setModele(Chifoumi *m);
     void setVue(ChifoumiVue *v);
 
+    char verificationFinPartie();
+
+    unsigned int pointMax=5;
+
+
 private:
     Chifoumi *_leModele; // partie de chifoumi
     ChifoumiVue *_laVue; // partie de chifoumi
