@@ -11,7 +11,6 @@ class Database
 public:
     Database();
     bool openDataBase();
-    bool restoreDataBase();
     void closeDataBase();
 
 private:

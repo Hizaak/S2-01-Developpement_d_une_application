@@ -11,7 +11,7 @@ class Presentation : public QObject
 {
     Q_OBJECT
 public:
-    explicit Presentation(Chifoumi *m, QObject *parent = nullptr);
+    explicit Presentation(Chifoumi *m, Database *db, QObject *parent = nullptr);
 
 
     void deroulerUnTour(Chifoumi::UnCoup /* Coup du joueur*/);
@@ -49,6 +49,11 @@ public:
      * BUT: Indique si le timer est actif (true si actif)
      */
 
+    void insertGameInformation(QString nomJoueur, unsigned int ptJoueur, unsigned int ptMachine, unsigned int tpsEcoule, QString typeVictoire);
+    /*
+     * BUT: Insertion des informations d'une partie de chifoumi dans la base de donnée
+     */
+
     unsigned int getLGTimer();
     unsigned int getPointMax();
     void setLGTimer(unsigned int sec);
@@ -69,6 +74,8 @@ private:
     unsigned int pointMax=5;
 
     char verificationFinPartie();
+
+    Database *db;
 
 
 };
