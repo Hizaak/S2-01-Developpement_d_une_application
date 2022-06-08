@@ -19,6 +19,7 @@ public:
 
     void insertNewUser(QString pseudo, QString mdp);
     bool getConnexionValidation();
+    Database *getDatabase();
 
 private slots:
     void connexion();

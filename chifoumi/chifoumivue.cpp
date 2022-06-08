@@ -5,7 +5,6 @@
 #include "connexionfen.h"
 
 #include <QPixmap>
-#include <QDebug>
 #include <QMessageBox>
 
 
@@ -21,7 +20,7 @@ ChifoumiVue::ChifoumiVue(Presentation *p, QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->setWindowTitle("SAE 2.01 - version 7");
+    this->setWindowTitle("SAE 2.01 - version 8");
 
     // Ouverture et affichage des images des figures dans les boutons.
     ui->boutonCiseau->setIcon(ressourceCiseau);
@@ -82,18 +81,8 @@ void ChifoumiVue::MAJInterface(char victoirePartie,
     afficherGagnantTotal(victoirePartie, scoreJGauche, scoreJDroit);
 }
 
-void ChifoumiVue::actionParametrerPartie() {
-    fenParametrage = new parametrageVue(pseudoJoueur, _laPresentation->getPointMax(), _laPresentation->getLGTimer());
-    fenParametrage->exec();
-
-    if (fenParametrage->getValidite()) {
-        _laPresentation->setLGTimer(fenParametrage->getLgTimer());
-        _laPresentation->setPointMax(fenParametrage->getPointMax());
-        pseudoJoueur = fenParametrage->getNomJoueur();
-    }
-
-    ui->labelPointInformation->setText(QString::number(fenParametrage->getPointMax()));
-    ui->labelTempsRestantInfo->setText(QString::number(fenParametrage->getLgTimer()));
+QString ChifoumiVue::getNomJoueur() {
+    return pseudoJoueur;
 }
 
 /// ================== SLOTS PRIVEE ==================
@@ -101,7 +90,7 @@ void ChifoumiVue::actionParametrerPartie() {
 void ChifoumiVue::actionAPropos() {
     QMessageBox fenAPropos;
     fenAPropos.setWindowTitle("À propos");
-    fenAPropos.setText("Version v7 du 06/06/2022\n\nFait par :\nAlexandre Maurice\nNicolas Dargazanli\nGuillaume Tritsch");
+    fenAPropos.setText("Version v8 du 06/06/2022\n\nFait par :\nAlexandre Maurice\nNicolas Dargazanli\nGuillaume Tritsch");
     fenAPropos.exec();
 }
 
@@ -179,6 +168,20 @@ void ChifoumiVue::pause() {
 }
 
 /// ================== METHODES PRIVEES ==================
+
+void ChifoumiVue::actionParametrerPartie() {
+    fenParametrage = new parametrageVue(pseudoJoueur, _laPresentation->getPointMax(), _laPresentation->getLGTimer());
+    fenParametrage->exec();
+
+    if (fenParametrage->getValidite()) {
+        _laPresentation->setLGTimer(fenParametrage->getLgTimer());
+        _laPresentation->setPointMax(fenParametrage->getPointMax());
+        pseudoJoueur = fenParametrage->getNomJoueur();
+    }
+
+    ui->labelPointInformation->setText(QString::number(fenParametrage->getPointMax()));
+    ui->labelTempsRestantInfo->setText(QString::number(fenParametrage->getLgTimer()));
+}
 
 void ChifoumiVue::afficherGagnantRound(char joueurGagnantRound) {
 

@@ -35,6 +35,8 @@ public:
 
     void setPresentation (Presentation *p);
 
+    QString getNomJoueur();
+
 private slots:
     void reinitialiser();
     /*
