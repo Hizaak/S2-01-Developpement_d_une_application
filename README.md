@@ -1,5 +1,5 @@
 # S2-01-Developpement_d_une_application
-Dépôt créé à l'occasion de la S2.01 pour assurer la collaborations entre ses différents membres et l'envoi des versions du dossier d'analyse et de conception aux professeurs.
+Dépôt créé à l'occasion de la S2.01 pour assurer la collaborations entre ses différents membres et l'envoi des versions du dossier d'analyse et de conception ainsi que du code source de l'application aux professeurs.
 
 ## Qui sommes-nous ?
 
@@ -10,6 +10,10 @@ Dépôt créé à l'occasion de la S2.01 pour assurer la collaborations entre se
 - Alexandre MAURICE
 
 Tous trois en TD I TP 1.
+
+## Quelle est l'application ?
+
+L'application développée est un Chifoumi d'un joueur seul contre une machine. Chaque version assure l'implémentation de nouvelles mesures fonctionnelles et/ou de nouvelles fonctionnalités, telles que l'initialisation du modèle MVP, l'ajout d'un chronomètre ou encore d'une base de données.
 
 ## Fonctionnement
 
