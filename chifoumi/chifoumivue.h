@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "modele.h"
 #include "parametrage.h"
+#include "connexionfen.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class ChifoumiVue; }
@@ -92,8 +93,14 @@ private:
     QString pseudoJoueur = "Le Joueur";
 
     parametrageVue * fenParametrage;
+    ConnexionFen * fenConnexion;
 
     // METHODES
+
+    void demanderConnexion();
+    /*
+     * BUT: Ouvre une page de connexion, si la connexion échoue, le programme s'arrete.
+     */
 
     void afficherGagnantTotal(char joueurGagnant, unsigned int scoreJGauche, unsigned int scoreJDroit);
     /*
