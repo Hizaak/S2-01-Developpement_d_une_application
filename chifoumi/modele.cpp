@@ -47,7 +47,6 @@ char Chifoumi::determinerGagnant()
 {
     char gagnantARetourner='N';
 
-
     // avant de commencer : match nul
     if (coupJoueur==pierre && coupMachine==papier){gagnantARetourner = 'M';}
     else if (coupMachine==pierre && coupJoueur==papier){gagnantARetourner = 'J';}
