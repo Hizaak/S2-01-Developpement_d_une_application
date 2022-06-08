@@ -1,10 +1,12 @@
 #include "chifoumivue.h"
 #include "presentation.h"
 #include "ui_chifoumivue.h"
+#include "parametrage.h"
 
 #include <QPixmap>
 #include <iostream>
 #include <QMessageBox>
+
 
 using namespace std;
 
@@ -18,7 +20,7 @@ ChifoumiVue::ChifoumiVue(Presentation *p, QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->setWindowTitle("SAE 2.01 - version 5");
+    this->setWindowTitle("SAE 2.01 - version 6");
 
     // Ouverture et affichage des images des figures dans les boutons.
     ui->boutonCiseau->setIcon(ressourceCiseau);
@@ -34,6 +36,7 @@ ChifoumiVue::ChifoumiVue(Presentation *p, QWidget *parent)
 
     connect(ui->action_Quitter, SIGNAL(triggered()), QApplication::instance(), SLOT(quit()));
     connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(actionAPropos()));
+    connect(ui->actionParametres, SIGNAL(triggered()), this, SLOT(actionParametrerPartie()));
 
     ui->boutonRejouer->setFocus();
 
@@ -75,12 +78,26 @@ void ChifoumiVue::MAJInterface(char victoirePartie,
     afficherGagnantTotal(victoirePartie, scoreJGauche, scoreJDroit);
 }
 
+void ChifoumiVue::actionParametrerPartie() {
+    fenParametrage = new parametrageVue(pseudoJoueur, _laPresentation->getPointMax(), _laPresentation->getLGTimer());
+    fenParametrage->exec();
+
+    if (fenParametrage->getValidite()) {
+        _laPresentation->setLGTimer(fenParametrage->getLgTimer());
+        _laPresentation->setPointMax(fenParametrage->getPointMax());
+        pseudoJoueur = fenParametrage->getNomJoueur();
+    }
+
+    ui->labelPointInformation->setText(QString::number(fenParametrage->getPointMax()));
+    ui->labelTempsRestantInfo->setText(QString::number(fenParametrage->getLgTimer()));
+}
+
 /// ================== SLOTS PRIVEE ==================
 
 void ChifoumiVue::actionAPropos() {
     QMessageBox fenAPropos;
     fenAPropos.setWindowTitle("À propos");
-    fenAPropos.setText("Version v5 du 01/06/2022\n\nFait par :\nAlexandre Maurice\nNicolas Dargazanli\nGuillaume Tritsch");
+    fenAPropos.setText("Version v6 du 05/06/2022\n\nFait par :\nAlexandre Maurice\nNicolas Dargazanli\nGuillaume Tritsch");
     fenAPropos.exec();
 }
 
@@ -120,6 +137,7 @@ void ChifoumiVue::reinitialiser() {
 
         majCouleur("neutre", "neutre");
 
+        ui->actionParametres->setDisabled(true);
 
         etatDuJeu = EtatsJeu::attenteCoupJoueur;
         break;
@@ -208,15 +226,17 @@ void ChifoumiVue::afficherGagnantTotal(char joueurGagnant, unsigned int scoreJGa
         ui->boutonPapier->setEnabled(false);
         ui->boutonPause->setEnabled(false);
 
-        ui->labelInfoJGagnant->setText("Joueur");
+        ui->labelInfoJGagnant->setText("Vous");
 
         majCouleur("neutre", "neutre");
 
         if (_laPresentation->getTempsRestant()==0) {
-            afficherFenetreVictoire(temps, "le Joueur", scoreJGauche);
+            afficherFenetreVictoire(temps, pseudoJoueur, scoreJGauche);
         } else {
-            afficherFenetreVictoire(point, "le Joueur", scoreJGauche);
+            afficherFenetreVictoire(point, pseudoJoueur, scoreJGauche);
         }
+
+        ui->actionParametres->setEnabled(true);
 
         etatDuJeu = EtatsJeu::finDePartie;
         break;
@@ -239,6 +259,8 @@ void ChifoumiVue::afficherGagnantTotal(char joueurGagnant, unsigned int scoreJGa
             afficherFenetreVictoire(point, "la Machine", scoreJDroit);
         }
 
+        ui->actionParametres->setEnabled(true);
+
         etatDuJeu = EtatsJeu::finDePartie;
         break;
     case 'N':
@@ -259,6 +281,8 @@ void ChifoumiVue::afficherGagnantTotal(char joueurGagnant, unsigned int scoreJGa
         } else {
             afficherFenetreVictoire(point, "Aucun");
         }
+
+        ui->actionParametres->setEnabled(true);
 
         etatDuJeu = EtatsJeu::finDePartie;
         break;

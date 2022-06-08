@@ -119,3 +119,20 @@ unsigned int Presentation::getTempsRestant() {
     return valeurTimer;
 }
 
+unsigned int Presentation::getLGTimer() {
+    return lgTimer;
+}
+
+unsigned int Presentation::getPointMax() {
+    return pointMax;
+}
+
+void Presentation::setLGTimer(unsigned int sec) {
+    lgTimer = sec;
+}
+
+void Presentation::setPointMax(unsigned int point) {
+    pointMax = point;
+}
+
+

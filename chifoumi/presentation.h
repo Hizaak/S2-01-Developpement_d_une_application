@@ -48,6 +48,11 @@ public:
      * BUT: Indique si le timer est actif (true si actif)
      */
 
+    unsigned int getLGTimer();
+    unsigned int getPointMax();
+    void setLGTimer(unsigned int sec);
+    void setPointMax(unsigned int point);
+
 private slots:
     void majTimer();
 

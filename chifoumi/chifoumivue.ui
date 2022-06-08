@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>612</height>
+    <width>722</width>
+    <height>520</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -50,8 +50,8 @@ background-color: rgb(243, 255, 233);
 #labelJDroit {
 	background-color: rgb(73, 85, 33);
 	border-radius: 10px;
-	padding-left: 30px;
-	padding-right: 30px;
+	padding-left: 20px;
+	padding-right: 20px;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	color: white;
@@ -415,7 +415,7 @@ margin-right: 15px;
          <item>
           <widget class="QLabel" name="labelJGauche">
            <property name="text">
-            <string>Joueur</string>
+            <string>Vous</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -844,7 +844,7 @@ margin-right: 15px;
          <item>
           <widget class="QLabel" name="labelJDroit">
            <property name="text">
-            <string>Machine</string>
+            <string>La Machine</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -1190,7 +1190,7 @@ margin-right: 15px;
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>722</width>
      <height>21</height>
     </rect>
    </property>
@@ -1198,6 +1198,8 @@ margin-right: 15px;
     <property name="title">
      <string>Fichier</string>
     </property>
+    <addaction name="actionParametres"/>
+    <addaction name="separator"/>
     <addaction name="action_Quitter"/>
    </widget>
    <widget class="QMenu" name="menuAide">
@@ -1223,6 +1225,14 @@ margin-right: 15px;
    </property>
    <property name="shortcut">
     <string>Alt+F3</string>
+   </property>
+  </action>
+  <action name="actionParametres">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Parametres</string>
    </property>
   </action>
  </widget>

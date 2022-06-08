@@ -1,3 +1,12 @@
+/*
+ * Nom : Jeu du Chifoumi - version 6
+ * Objectif : Jeu du chifoumi dans le cadre de la sae 2.01
+ * Date : 05/06/2022
+ * Auteur : Nicolas Dargazanli
+ *          Alexandre Maurice
+ *          Guillaume Tritsch
+ */
+
 #include "chifoumivue.h"
 #include "presentation.h"
 #include "modele.h"
