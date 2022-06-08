@@ -73,6 +73,11 @@ private slots:
      * BUT: Ouvre une fenetre de dialogue pour permettre au joueur de parametrer la partie
      */
 
+    void actionResultat();
+    /*
+     * BUT: Ouvre une fenetre de dialogue qui indique les informations sur les meilleurs parties de chifoumi
+     *
+     */
 
 private:
 
@@ -95,7 +100,6 @@ private:
     QString pseudoJoueur = "Le Joueur";
 
     parametrageVue * fenParametrage;
-    ConnexionFen * fenConnexion;
 
     // METHODES
 

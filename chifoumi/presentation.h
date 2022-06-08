@@ -4,14 +4,13 @@
 #include <QTimer>
 #include <QObject>
 #include "modele.h"
-#include "database.h"
 
 class ChifoumiVue;
 class Presentation : public QObject
 {
     Q_OBJECT
 public:
-    explicit Presentation(Chifoumi *m, Database *db, QObject *parent = nullptr);
+    explicit Presentation(Chifoumi *m, QObject *parent = nullptr);
 
 
     void deroulerUnTour(Chifoumi::UnCoup /* Coup du joueur*/);
@@ -59,8 +58,6 @@ public:
     void setLGTimer(unsigned int sec);
     void setPointMax(unsigned int point);
 
-    Database getDatabase();
-
 private slots:
     void majTimer();
 
@@ -69,14 +66,11 @@ private:
     ChifoumiVue *_laVue;
     QTimer* timer;
 
-    unsigned int lgTimer = 30;
-    unsigned int valeurTimer;
-    unsigned int pointMax=5;
+    unsigned int lgTimer = 30; // Durée total d'une partie (30 sec par défaut)
+    unsigned int valeurTimer; // Valeur actuelle du timer
+    unsigned int pointMax=5; // Point maximum (5 par défaut)
 
     char verificationFinPartie();
-
-    Database *db;
-
 
 };
 

@@ -2,7 +2,6 @@
 #define CONNEXIONFEN_H
 
 #include <QDialog>
-#include "database.h"
 #include "presentation.h"
 
 namespace Ui {
@@ -18,8 +17,14 @@ public:
     ~ConnexionFen();
 
     void insertNewUser(QString pseudo, QString mdp);
+    /*
+     * BUT : Création d'un nouvelle utilisateur si l'identifiant est libre
+     */
+
     bool getConnexionValidation();
-    Database *getDatabase();
+    /*
+     * BUT : Retourne true si la connexion est valide
+     */
 
 private slots:
     void connexion();
@@ -28,10 +33,11 @@ private slots:
 
 private:
     Ui::ConnexionFen *ui;
-    Database * db;
-
 
     bool connexionReussie;
+    /*
+     * BUT : Indicateur si la connexion est valide
+     */
 };
 
 #endif // CONNEXIONFEN_H
