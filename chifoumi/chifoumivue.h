@@ -26,7 +26,8 @@ public:
                       Chifoumi::UnCoup coupJGauche,
                       Chifoumi::UnCoup coupJDroit,
                       unsigned int scoreJGauche,
-                      unsigned int scoreJDroit);
+                      unsigned int scoreJDroit,
+                      unsigned int valeurTimer);
 
     Presentation *getPresentation();
 
@@ -54,13 +55,21 @@ private slots:
      */
 
     void actionAPropos() ;
+    /*
+     * BUT: Ouvre une fenetre "A propos..."
+     */
 
+    void pause() ;
+    /*
+     * BUT: Indique à la presentation de mettre en pause le timer
+     */
 
 
 private:
 
     // NOUVEAUX TYPES
     enum EtatsJeu {attenteLancementPartie, attenteCoupJoueur, finDePartie};
+    enum TypeVictoire {point, temps};
 
     // ATTRIBUTS
     Ui::ChifoumiVue *ui;
@@ -76,9 +85,9 @@ private:
 
     // METHODES
 
-    void afficherGagnantTotal(char joueurGagnant);
+    void afficherGagnantTotal(char joueurGagnant, unsigned int scoreJGauche, unsigned int scoreJDroit);
     /*
-     * BUT: Affiche au centre de l'écran le gagnant du precedent tour.
+     * BUT: Affiche au centre de l'écran le gagnant du precedent tour et ouvre une fenetre avec un message pouvant comporter le score du gagnant si il gagne au temps.
      */
 
     void afficherGagnantRound(char joueurGagnant);
@@ -106,7 +115,15 @@ private:
      * BUT: determine le pixmap à utiliser à l'affichage en fonction du parametre UnCoup passé en parametre.
      */
 
-    void afficherFenetreVictoire(QString);
+    void afficherFenetreVictoire(TypeVictoire victoire, QString joueur, unsigned int nbrPointGagnant = 0);
+    /*
+     * BUT: affichage de la fenetre de la victoire de la variable joueur et du type de la victoire.
+     */
+
+    void afficherTemps(unsigned int temps);
+    /*
+     * BUT: afficher le temps en fonction de la variable temps
+     */
 
 };
 #endif // CHIFOUMIVUE_H

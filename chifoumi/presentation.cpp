@@ -3,7 +3,8 @@
 
 Presentation::Presentation(Chifoumi *m, QObject *parent) : QObject(parent), _leModele(m)
 {
-
+    timer = new QTimer();
+    connect(this->timer, SIGNAL(timeout()), this, SLOT(majTimer()));
 }
 
 Chifoumi *Presentation::getModele()
@@ -31,12 +32,16 @@ void Presentation::reinitialiser() {
     _leModele->initCoups();
     _leModele->initScores();
 
+    timer->start(1000);
+    valeurTimer = lgTimer;
+
     _laVue->MAJInterface(verificationFinPartie(),
                          _leModele->determinerGagnant(),
                          _leModele->getCoupJoueur(),
                          _leModele->getCoupMachine(),
                          _leModele->getScoreJoueur(),
-                         _leModele->getScoreMachine());
+                         _leModele->getScoreMachine(),
+                         valeurTimer);
 }
 
 void Presentation::deroulerUnTour(Chifoumi::UnCoup coupJoueur) {
@@ -46,25 +51,71 @@ void Presentation::deroulerUnTour(Chifoumi::UnCoup coupJoueur) {
     // MAJ des scores
     _leModele->majScores(_leModele->determinerGagnant());
 
-
     _laVue->MAJInterface(verificationFinPartie(),
                          _leModele->determinerGagnant(),
                          _leModele->getCoupJoueur(),
                          _leModele->getCoupMachine(),
                          _leModele->getScoreJoueur(),
-                         _leModele->getScoreMachine());
+                         _leModele->getScoreMachine(),
+                         valeurTimer);
 }
-
-
 
 char Presentation::verificationFinPartie(){
     if (_leModele->getScoreJoueur() == pointMax) {
+        timer->stop();
         return 'J';
     } else if (_leModele->getScoreMachine() == pointMax){
+        timer->stop();
         return 'M';
     } else {
-        return 'N';
+        return 'O';
     }
 }
 
+void Presentation::majTimer() {
+    char gagnantPartie = 'O'; // "O" signifie que le timer n'est pas finis
+
+    valeurTimer--;
+
+    if (valeurTimer==0) {
+        if (_leModele->getScoreJoueur() > _leModele->getScoreMachine()) {
+            gagnantPartie = 'J';
+        } else if (_leModele->getScoreJoueur() < _leModele->getScoreMachine()) {
+            gagnantPartie = 'M';
+        } else {
+            gagnantPartie = 'N';
+        }
+        timer->stop();
+    } else {
+        timer->start(1000);
+    }
+
+    _laVue->MAJInterface(gagnantPartie,
+                         'O',
+                         _leModele->getCoupJoueur(),
+                         _leModele->getCoupMachine(),
+                         _leModele->getScoreJoueur(),
+                         _leModele->getScoreMachine(),
+                         valeurTimer);
+}
+
+void Presentation::pauseTimer() {
+     if (timer->isActive()) {
+         timer->stop();
+     } else {
+         timer->start();
+     }
+}
+
+bool Presentation::timerIsActive() {
+    return timer->isActive();
+}
+
+unsigned int Presentation::getTempsEcoule() {
+    return lgTimer - valeurTimer;
+}
+
+unsigned int Presentation::getTempsRestant() {
+    return valeurTimer;
+}
 
