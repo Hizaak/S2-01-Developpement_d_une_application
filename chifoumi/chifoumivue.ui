@@ -624,6 +624,7 @@ margin-right: 15px;
              <font>
               <family>Segoe UI Segoe UI Semibold</family>
               <pointsize>12</pointsize>
+              <weight>10</weight>
               <italic>false</italic>
               <bold>false</bold>
               <kerning>true</kerning>
@@ -1198,6 +1199,7 @@ margin-right: 15px;
     <property name="title">
      <string>Fichier</string>
     </property>
+    <addaction name="actionR_sultat"/>
     <addaction name="actionParametres"/>
     <addaction name="separator"/>
     <addaction name="action_Quitter"/>
@@ -1233,6 +1235,17 @@ margin-right: 15px;
    </property>
    <property name="text">
     <string>Parametres</string>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
+   </property>
+  </action>
+  <action name="actionR_sultat">
+   <property name="text">
+    <string>Résultats</string>
+   </property>
+   <property name="shortcut">
+    <string>F3</string>
    </property>
   </action>
  </widget>

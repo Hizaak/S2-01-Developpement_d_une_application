@@ -16,7 +16,8 @@ SOURCES += \
     chifoumivue.cpp \
     modele.cpp \
     parametrage.cpp \
-    presentation.cpp
+    presentation.cpp \
+    resultatfen.cpp
 
 HEADERS += \
     chifoumivue.h \
@@ -24,12 +25,14 @@ HEADERS += \
     database.h \
     modele.h \
     parametrage.h \
-    presentation.h
+    presentation.h \
+    resultatfen.h
 
 FORMS += \
     chifoumivue.ui \
     connexionfen.ui \
-    parametrage.ui
+    parametrage.ui \
+    resultatfen.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
