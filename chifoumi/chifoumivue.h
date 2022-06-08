@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "modele.h"
+#include "parametrage.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class ChifoumiVue; }
@@ -64,6 +65,11 @@ private slots:
      * BUT: Indique à la presentation de mettre en pause le timer
      */
 
+    void actionParametrerPartie();
+    /*
+     * BUT: Ouvre une fenetre de dialogue pour permettre au joueur de parametrer la partie
+     */
+
 
 private:
 
@@ -82,6 +88,10 @@ private:
     QPixmap ressourceRien = QPixmap(":png/rien_115");     // ressource de l'image de rien
 
     EtatsJeu etatDuJeu; // état du jeu
+
+    QString pseudoJoueur = "Le Joueur";
+
+    parametrageVue * fenParametrage;
 
     // METHODES
 
