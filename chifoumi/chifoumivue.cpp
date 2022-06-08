@@ -2,9 +2,10 @@
 #include "presentation.h"
 #include "ui_chifoumivue.h"
 #include "parametrage.h"
+#include "connexionfen.h"
 
 #include <QPixmap>
-#include <iostream>
+#include <QDebug>
 #include <QMessageBox>
 
 
@@ -20,7 +21,7 @@ ChifoumiVue::ChifoumiVue(Presentation *p, QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->setWindowTitle("SAE 2.01 - version 6");
+    this->setWindowTitle("SAE 2.01 - version 7");
 
     // Ouverture et affichage des images des figures dans les boutons.
     ui->boutonCiseau->setIcon(ressourceCiseau);
@@ -44,7 +45,10 @@ ChifoumiVue::ChifoumiVue(Presentation *p, QWidget *parent)
     ui->labelInfoJGagnant->hide();
 
     etatDuJeu = EtatsJeu::attenteLancementPartie;
+
+    hide();
 }
+
 
 // Destructeurs
 ChifoumiVue::~ChifoumiVue()
@@ -97,7 +101,7 @@ void ChifoumiVue::actionParametrerPartie() {
 void ChifoumiVue::actionAPropos() {
     QMessageBox fenAPropos;
     fenAPropos.setWindowTitle("À propos");
-    fenAPropos.setText("Version v6 du 05/06/2022\n\nFait par :\nAlexandre Maurice\nNicolas Dargazanli\nGuillaume Tritsch");
+    fenAPropos.setText("Version v7 du 06/06/2022\n\nFait par :\nAlexandre Maurice\nNicolas Dargazanli\nGuillaume Tritsch");
     fenAPropos.exec();
 }
 
@@ -201,7 +205,7 @@ void ChifoumiVue::afficherFenetreVictoire(TypeVictoire victoire, QString nomGagn
 
     switch (victoire) {
     case TypeVictoire::point:
-        FenVictoire.setText("Bravo, " + nomGagnant + " a gagné la partie apres "+QString::number(valeurTimer)+" de jeu.");
+        FenVictoire.setText("Bravo, " + nomGagnant + " a gagné la partie apres "+QString::number(valeurTimer)+" secondes de jeu.");
         break;
     case TypeVictoire::temps:
         if (nomGagnant == "Aucun") {

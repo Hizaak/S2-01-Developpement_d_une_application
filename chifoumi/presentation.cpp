@@ -1,5 +1,10 @@
 #include "presentation.h"
 #include "chifoumivue.h"
+#include "database.h"
+
+#include <QtSql/QSqlQuery>
+#include <QDebug>
+#include <QtSql/QSqlRecord>
 
 Presentation::Presentation(Chifoumi *m, QObject *parent) : QObject(parent), _leModele(m)
 {
@@ -134,5 +139,4 @@ void Presentation::setLGTimer(unsigned int sec) {
 void Presentation::setPointMax(unsigned int point) {
     pointMax = point;
 }
-
 
