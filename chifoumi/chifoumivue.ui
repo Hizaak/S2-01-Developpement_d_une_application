@@ -288,7 +288,34 @@ padding-bottom: 10px;
 color: white;
 font: 10pt &quot;Segoe UI Emoji&quot;;
 }
-</string>
+
+/* QMenu */
+
+QMenu::item {
+ background-color:  rgb(190, 190, 190);
+border-radius: 3px;
+width: 100px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+
+		margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+QMenu {
+    background-color: #FDFDFD;
+}
+
+QMenu::item:selected  {
+ background-color:  rgb(190, 190, 190);
+border-radius: 3px;
+padding-right: 15px;
+margin-right: 15px;
+}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -435,7 +462,7 @@ font: 10pt &quot;Segoe UI Emoji&quot;;
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap>:/png/rien_115.png</pixmap>
+            <pixmap resource="images/images.qrc">:/png/rien_115.png</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -667,7 +694,7 @@ font: 10pt &quot;Segoe UI Emoji&quot;;
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap>:/png/rien_115.png</pixmap>
+            <pixmap resource="images/images.qrc">:/png/rien_115.png</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -771,7 +798,7 @@ font: 10pt &quot;Segoe UI Emoji&quot;;
             <string/>
            </property>
            <property name="icon">
-            <iconset>
+            <iconset resource="images/images.qrc">
              <normaloff>:/png/pierre_115.png</normaloff>:/png/pierre_115.png</iconset>
            </property>
            <property name="iconSize">
@@ -794,7 +821,7 @@ font: 10pt &quot;Segoe UI Emoji&quot;;
             <string/>
            </property>
            <property name="icon">
-            <iconset>
+            <iconset resource="images/images.qrc">
              <normaloff>:/png/papier_115.png</normaloff>:/png/papier_115.png</iconset>
            </property>
            <property name="iconSize">
@@ -817,7 +844,7 @@ font: 10pt &quot;Segoe UI Emoji&quot;;
             <string/>
            </property>
            <property name="icon">
-            <iconset>
+            <iconset resource="images/images.qrc">
              <normaloff>:/png/ciseau_115.png</normaloff>:/png/ciseau_115.png</iconset>
            </property>
            <property name="iconSize">
@@ -883,11 +910,43 @@ font: 10pt &quot;Segoe UI Emoji&quot;;
      <x>0</x>
      <y>0</y>
      <width>1057</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFichier">
+    <property name="title">
+     <string>Fichier</string>
+    </property>
+    <addaction name="action_Quitter"/>
+   </widget>
+   <widget class="QMenu" name="menuAide">
+    <property name="title">
+     <string>Aide</string>
+    </property>
+    <addaction name="actionA_propos_de"/>
+   </widget>
+   <addaction name="menuFichier"/>
+   <addaction name="menuAide"/>
   </widget>
+  <action name="actionA_propos_de">
+   <property name="text">
+    <string>A &amp;propos de...</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="action_Quitter">
+   <property name="text">
+    <string>&amp;Quitter</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+F3</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="images/images.qrc"/>
+ </resources>
  <connections/>
 </ui>
