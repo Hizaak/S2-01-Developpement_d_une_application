@@ -32,6 +32,10 @@ ConnexionFen::~ConnexionFen()
     delete ui;
 }
 
+Database *ConnexionFen::getDatabase() {
+    return db;
+}
+
 void ConnexionFen::insertNewUser(QString pseudo, QString mdp) {
     QSqlQuery query;
     query.exec("SELECT * FROM connexionChifoumiDMT;");
@@ -55,6 +59,8 @@ void ConnexionFen::connexion() {
     while (query.next()) {
         if (query.value(0).toString() == ui->lEIdentifiant->text() && query.value(1).toString() == ui->lEMDP->text()) {
             connexionReussie = true;
+            db->closeDataBase();
+            delete db;
             close();
             break;
         }
@@ -63,7 +69,6 @@ void ConnexionFen::connexion() {
     if (!connexionReussie) {
         ui->labelErreur->setText("L'identifiant ou le mot de passe est invalide");
     }
-
 }
 
 bool ConnexionFen::getConnexionValidation() {

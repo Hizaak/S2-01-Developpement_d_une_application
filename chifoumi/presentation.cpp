@@ -3,11 +3,26 @@
 #include "database.h"
 
 #include <QtSql/QSqlQuery>
-#include <QDebug>
+#include <QTime>
 #include <QtSql/QSqlRecord>
+#include <QVariant>
+#include <QSqlError>
+#include <QDebug>
 
-Presentation::Presentation(Chifoumi *m, QObject *parent) : QObject(parent), _leModele(m)
+Presentation::Presentation(Chifoumi *m, Database *db, QObject *parent) : QObject(parent), _leModele(m), db(db)
 {
+    db->openDataBase();
+
+    QSqlQuery query;
+    query.exec("CREATE TABLE IF NOT EXISTS informationPartieDMT ("
+               "id INTEGER(4) PRIMARY KEY, "
+               "horodatage DATETIME, "
+               "nomJoueurHumain VARCHAR(80), "
+               "nbrPointJoueur INTEGER(255), "
+               "nbrPointMachine INTEGER(255), "
+               "tempsEcoule INTEGER(255), "
+               "typeVictoire VARCHAR(5) "
+               "CHECK (typeVictoire in ('temps','point')));");
     timer = new QTimer();
     connect(this->timer, SIGNAL(timeout()), this, SLOT(majTimer()));
 }
@@ -32,6 +47,15 @@ void Presentation::setVue(ChifoumiVue *v)
     _laVue = v;
 }
 
+void Presentation::insertGameInformation(QString nomJoueur, unsigned int ptJoueur, unsigned int ptMachine, unsigned int tpsEcoule, QString typeVictoire) {
+    QSqlQuery query;
+    query.exec("SELECT COUNT(*) FROM informationPartieDMT;");
+
+    query.next();
+    int id = query.value(0).toInt();
+
+    query.exec("INSERT INTO informationPartieDMT VALUES ("+QString::number(id)+", CURRENT_TIMESTAMP  , '"+nomJoueur+"',"+QString::number(ptJoueur)+","+QString::number(ptMachine)+","+QString::number(tpsEcoule)+",'"+typeVictoire+"');");
+}
 
 void Presentation::reinitialiser() {
     _leModele->initCoups();
@@ -68,9 +92,11 @@ void Presentation::deroulerUnTour(Chifoumi::UnCoup coupJoueur) {
 char Presentation::verificationFinPartie(){
     if (_leModele->getScoreJoueur() == pointMax) {
         timer->stop();
+        insertGameInformation(_laVue->getNomJoueur(), _leModele->getScoreJoueur(), _leModele->getScoreMachine(),getTempsEcoule(), "point");
         return 'J';
     } else if (_leModele->getScoreMachine() == pointMax){
         timer->stop();
+        insertGameInformation(_laVue->getNomJoueur(), _leModele->getScoreJoueur(), _leModele->getScoreMachine(),getTempsEcoule(), "point");
         return 'M';
     } else {
         return 'O';
@@ -90,6 +116,7 @@ void Presentation::majTimer() {
         } else {
             gagnantPartie = 'N';
         }
+        insertGameInformation(_laVue->getNomJoueur(), _leModele->getScoreJoueur(), _leModele->getScoreMachine(),getTempsEcoule(), "temps");
         timer->stop();
     } else {
         timer->start(1000);

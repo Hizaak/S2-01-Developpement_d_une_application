@@ -1,5 +1,5 @@
 /*
- * Nom : Jeu du Chifoumi - version 7
+ * Nom : Jeu du Chifoumi - version 8
  * Objectif : Jeu du chifoumi dans le cadre de la sae 2.01
  * Date : 06/06/2022
  * Auteur : Nicolas Dargazanli
@@ -7,7 +7,6 @@
  *          Guillaume Tritsch
  */
 
-#include <QDebug>
 #include "chifoumivue.h"
 #include "presentation.h"
 #include "modele.h"
@@ -24,7 +23,7 @@ int main(int argc, char *argv[])
     if (fenConnexion->getConnexionValidation()) {
         Chifoumi *m = new Chifoumi();
         // créer la présentation et lui associer le modèle
-        Presentation *p = new Presentation(m);
+        Presentation *p = new Presentation(m, fenConnexion->getDatabase());
         // créer la vue
         ChifoumiVue w(p);
         // associer la vue à la présentation
