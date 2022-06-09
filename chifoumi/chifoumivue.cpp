@@ -1,17 +1,24 @@
 #include "chifoumivue.h"
+#include "presentation.h"
 #include "ui_chifoumivue.h"
+
 #include <QPixmap>
-#include <QShortcut>
+#include <iostream>
 #include <QDebug>
 
-ChifoumiVue::ChifoumiVue(Chifoumi *m, QWidget *parent)
+using namespace std;
+
+/// ================== METHODES PUBLIQUES ==================
+
+// Constructeurs
+ChifoumiVue::ChifoumiVue(Presentation *p, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::ChifoumiVue)
-    , partieDeChifoumi(m)
+    , _laPresentation(p)
 {
     ui->setupUi(this);
 
-    this->setWindowTitle("SAE 2.01 - version 1");
+    this->setWindowTitle("SAE 2.01 - version 2");
 
     // Ouverture et affichage des images des figures dans les boutons.
     ui->boutonCiseau->setIcon(ressourceCiseau);
@@ -29,37 +36,116 @@ ChifoumiVue::ChifoumiVue(Chifoumi *m, QWidget *parent)
     etatDuJeu = EtatsJeu::attenteLancementPartie;
 }
 
-//SLOTS de jeu
+// Destructeurs
+ChifoumiVue::~ChifoumiVue()
+{
+    delete ui;
+}
+
+// Accesseurs
+Presentation *ChifoumiVue::getPresentation() {
+    return _laPresentation;
+}
+
+// Mutateurs
+void ChifoumiVue::setPresentation (Presentation *p) {
+    _laPresentation = p;
+}
+
+// Affichage
+void ChifoumiVue::MAJInterface(char joueurGagnant,
+                               Chifoumi::UnCoup coupJGauche,
+                               Chifoumi::UnCoup coupJDroit,
+                               unsigned int scoreJGauche,
+                               unsigned int scoreJDroit)
+{
+    afficherGagnant(joueurGagnant);
+    afficherPoint(scoreJGauche, scoreJDroit);
+    afficherCoup(coupJGauche, coupJDroit);
+}
+
+/// ================== SLOTS PRIVEE ==================
+
+
 void ChifoumiVue::jouerPierre() {
-    deroulerUnTour(Chifoumi::UnCoup::pierre);
+    _laPresentation->deroulerUnTour(Chifoumi::UnCoup::pierre);
 }
 
 void ChifoumiVue::jouerCiseau() {
-    deroulerUnTour(Chifoumi::UnCoup::ciseau);
+    _laPresentation->deroulerUnTour(Chifoumi::UnCoup::ciseau);
 }
 
 void ChifoumiVue::jouerPapier() {
-    deroulerUnTour(Chifoumi::UnCoup::papier);
+    _laPresentation->deroulerUnTour(Chifoumi::UnCoup::papier);
 }
 
-void ChifoumiVue::deroulerUnTour(Chifoumi::UnCoup coupJoueur) {
-    choixJoueur(coupJoueur);
-    choixMachine();
-    determinerEtAfficherGagnant();
+void ChifoumiVue::reinitialiser() {
+
+    _laPresentation->reinitialiser();
+
+    switch (etatDuJeu) {
+    case EtatsJeu::attenteCoupJoueur:
+        majCouleur("neutre", "neutre");
+
+        ui->labelInfoJGagnant->setText("Aucun");
+        break;
+
+    case EtatsJeu::attenteLancementPartie:
+        ui->boutonCiseau->setEnabled(true);
+        ui->boutonPierre->setEnabled(true);
+        ui->boutonPapier->setEnabled(true);
+        ui->boutonRejouer->setText("Relancer la partie");
+
+        majCouleur("neutre", "neutre");
+
+        ui->labelInfoJGagnant->setText("Aucun");
+
+        etatDuJeu = EtatsJeu::attenteCoupJoueur;
+        break;
+    }
 }
 
-void ChifoumiVue::choixJoueur(Chifoumi::UnCoup coupJoueur) {
-    partieDeChifoumi->setCoupJoueur(coupJoueur);
-    ui->imageJGauche->setPixmap(pixmapDeCoup(coupJoueur));
+/// ================== METHODES PRIVEES ==================
+
+void ChifoumiVue::afficherGagnant(char joueurGagnant) {
+    switch (joueurGagnant) {
+    case 'J':
+        ui->labelInfoJGagnant->setText("Joueur");
+        majCouleur("true", "false");
+        break;
+    case 'M':
+        ui->labelInfoJGagnant->setText("Machine");
+        majCouleur("false", "true");
+        break;
+    case 'N':
+        ui->labelInfoJGagnant->setText("Nul");
+        majCouleur("false", "false");
+        break;
+    }
 }
 
-void ChifoumiVue::choixMachine() {
-   Chifoumi::UnCoup coupMachine;
+void ChifoumiVue::afficherPoint(unsigned int jGauche, unsigned int jDroit) {
+    ui->labelPointJGauche->setText(QString::number(jGauche));
+    ui->labelPointJDroit->setText(QString::number(jDroit));
+}
 
-   coupMachine = partieDeChifoumi->genererUnCoup();
+void ChifoumiVue::majCouleur(QString valeurJGauche, QString valeurJDroit) {
+    ui->labelJGauche->setProperty("victoire", valeurJGauche);
+    ui->frameJGauche->setProperty("victoire", valeurJGauche);
+    ui->labelPointJGauche->setProperty("victoire", valeurJGauche);
 
-   partieDeChifoumi->setCoupMachine(coupMachine);
-   ui->imageJDroit->setPixmap(pixmapDeCoup(coupMachine));
+    ui->labelJDroit->setProperty("victoire", valeurJDroit);
+    ui->frameJDroit->setProperty("victoire", valeurJDroit);
+    ui->labelPointJDroit->setProperty("victoire", valeurJDroit);
+
+    this->setStyleSheet(this->styleSheet());
+}
+
+
+void ChifoumiVue::afficherCoup(Chifoumi::UnCoup coupJGauche, Chifoumi::UnCoup coupJDroit)
+{
+    ui->imageJGauche->setPixmap(pixmapDeCoup(coupJGauche));
+    ui->imageJDroit->setPixmap(pixmapDeCoup(coupJDroit));
 }
 
 QPixmap ChifoumiVue::pixmapDeCoup(Chifoumi::UnCoup coup) {
@@ -81,106 +167,5 @@ QPixmap ChifoumiVue::pixmapDeCoup(Chifoumi::UnCoup coup) {
     }
 
     return ressource;
-}
-
-void ChifoumiVue::determinerEtAfficherGagnant() {
-    char joueurGagnant;
-    joueurGagnant = partieDeChifoumi->determinerGagnant();
-    partieDeChifoumi->majScores(joueurGagnant);
-
-    switch (joueurGagnant) {
-    case 'J':
-        ui->labelInfoJGagnant->setText("Joueur");
-        majCouleurDroit("false");
-        majCouleurGauche("true");
-        break;
-    case 'M':
-        ui->labelInfoJGagnant->setText("Machine");
-        majCouleurDroit("true");
-        majCouleurGauche("false");
-        break;
-    case 'N':
-        ui->labelInfoJGagnant->setText("Nul");
-        majCouleurDroit("false");
-        majCouleurGauche("false");
-        break;
-    }
-
-    this->afficherPoint();
-    styleSheetMAJ();
-}
-
-
-void ChifoumiVue::reinitialiser() {
-
-    switch (etatDuJeu) {
-    case EtatsJeu::attenteCoupJoueur:
-
-        partieDeChifoumi->initCoups();
-        partieDeChifoumi->initScores();
-
-        this->afficherPoint();
-
-        ui->labelInfoJGagnant->setText("Aucun");
-        ui->imageJDroit->setPixmap(ressourceRien);
-        ui->imageJGauche->setPixmap(ressourceRien);
-
-        majCouleurDroit("neutre");
-        majCouleurGauche("neutre");
-
-        styleSheetMAJ();
-        break;
-
-    case EtatsJeu::attenteLancementPartie:
-
-        ui->boutonCiseau->setEnabled(true);
-        ui->boutonPierre->setEnabled(true);
-        ui->boutonPapier->setEnabled(true);
-
-        ui->boutonRejouer->setText("Relancer la partie");
-
-        partieDeChifoumi->initCoups();
-        partieDeChifoumi->initScores();
-
-        this->afficherPoint();
-
-        ui->labelInfoJGagnant->setText("Aucun");
-        ui->imageJDroit->setPixmap(ressourceRien);
-        ui->imageJGauche->setPixmap(ressourceRien);
-
-        majCouleurDroit("neutre");
-        majCouleurGauche("neutre");
-
-        styleSheetMAJ();
-
-        etatDuJeu = EtatsJeu::attenteCoupJoueur;
-        break;
-    }
-}
-
-void ChifoumiVue::afficherPoint() {
-    ui->labelPointJGauche->setText(QString::number(partieDeChifoumi->getScoreJoueur()));
-    ui->labelPointJDroit->setText(QString::number(partieDeChifoumi->getScoreMachine()));
-}
-
-void ChifoumiVue::styleSheetMAJ() {
-    this->setStyleSheet(this->styleSheet());
-}
-
-void ChifoumiVue::majCouleurGauche(QString valeur) {
-    ui->labelJGauche->setProperty("victoire", valeur);
-    ui->frameJGauche->setProperty("victoire", valeur);
-    ui->labelPointJGauche->setProperty("victoire", valeur);
-}
-
-void ChifoumiVue::majCouleurDroit(QString valeur) {
-    ui->labelJDroit->setProperty("victoire", valeur);
-    ui->frameJDroit->setProperty("victoire", valeur);
-    ui->labelPointJDroit->setProperty("victoire", valeur);
-}
-
-ChifoumiVue::~ChifoumiVue()
-{
-    delete ui;
 }
 
