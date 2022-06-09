@@ -4,6 +4,7 @@
 #include <QTimer>
 #include <QObject>
 #include "modele.h"
+#include "database.h"
 
 class ChifoumiVue;
 class Presentation : public QObject
@@ -52,6 +53,8 @@ public:
     unsigned int getPointMax();
     void setLGTimer(unsigned int sec);
     void setPointMax(unsigned int point);
+
+    Database getDatabase();
 
 private slots:
     void majTimer();
