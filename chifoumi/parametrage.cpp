@@ -7,6 +7,8 @@ parametrageVue::parametrageVue(QString pseudoActuel, unsigned int point, unsigne
 {
     ui->setupUi(this);
 
+    setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
+
     ui->lEPseudo->setText(pseudoActuel);
     ui->sBPointVictoire->setValue(point);
     ui->sBTimerFinPartie->setValue(lgTimer);
@@ -40,6 +42,10 @@ void parametrageVue::valider() {
     if (getNomJoueur() != "" && getNomJoueur().toUpper() != "LA MACHINE") {
         informationValide = true;
         this->close();
+    } else if (getNomJoueur() == "") {
+        ui->labelIndicateur->setText("Vous devez entrer un nom.");
+    } else if (getNomJoueur().toUpper() == "LA MACHINE") {
+        ui->labelIndicateur->setText("Votre nom ne peut pas être '"+getNomJoueur()+"'.");
     }
 }
 

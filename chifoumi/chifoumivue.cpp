@@ -3,10 +3,11 @@
 #include "ui_chifoumivue.h"
 #include "parametrage.h"
 #include "connexionfen.h"
+#include "resultatfen.h"
 
 #include <QPixmap>
 #include <QMessageBox>
-
+#include <QDebug>
 
 using namespace std;
 
@@ -20,7 +21,7 @@ ChifoumiVue::ChifoumiVue(Presentation *p, QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->setWindowTitle("SAE 2.01 - version 8");
+    this->setWindowTitle("SAE 2.01 - version 9");
 
     // Ouverture et affichage des images des figures dans les boutons.
     ui->boutonCiseau->setIcon(ressourceCiseau);
@@ -34,18 +35,19 @@ ChifoumiVue::ChifoumiVue(Presentation *p, QWidget *parent)
     connect(ui->boutonRejouer, SIGNAL(clicked()), this, SLOT(reinitialiser()));
     connect(ui->boutonPause, SIGNAL(clicked()), this, SLOT(pause()));
 
+    // Connexion des boutons du menu
     connect(ui->action_Quitter, SIGNAL(triggered()), QApplication::instance(), SLOT(quit()));
     connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(actionAPropos()));
     connect(ui->actionParametres, SIGNAL(triggered()), this, SLOT(actionParametrerPartie()));
+    connect(ui->actionR_sultat, SIGNAL(triggered()), this, SLOT(actionResultat()));
 
     ui->boutonRejouer->setFocus();
 
+    // Cacher les labels d'indication du joueur gagnant
     ui->labelGagnant->hide();
     ui->labelInfoJGagnant->hide();
 
     etatDuJeu = EtatsJeu::attenteLancementPartie;
-
-    hide();
 }
 
 
@@ -55,12 +57,16 @@ ChifoumiVue::~ChifoumiVue()
     delete ui;
 }
 
-// Accesseurs
+// Get
 Presentation *ChifoumiVue::getPresentation() {
     return _laPresentation;
 }
 
-// Mutateurs
+QString ChifoumiVue::getNomJoueur() {
+    return pseudoJoueur;
+}
+
+// Set
 void ChifoumiVue::setPresentation (Presentation *p) {
     _laPresentation = p;
 }
@@ -81,16 +87,17 @@ void ChifoumiVue::MAJInterface(char victoirePartie,
     afficherGagnantTotal(victoirePartie, scoreJGauche, scoreJDroit);
 }
 
-QString ChifoumiVue::getNomJoueur() {
-    return pseudoJoueur;
-}
-
 /// ================== SLOTS PRIVEE ==================
+
+void ChifoumiVue::actionResultat() {
+    ResultatFen fenResultat;
+    fenResultat.exec();
+}
 
 void ChifoumiVue::actionAPropos() {
     QMessageBox fenAPropos;
     fenAPropos.setWindowTitle("À propos");
-    fenAPropos.setText("Version v8 du 06/06/2022\n\nFait par :\nAlexandre Maurice\nNicolas Dargazanli\nGuillaume Tritsch");
+    fenAPropos.setText("Version v9 du 07/06/2022\n\nFait par :\nAlexandre Maurice\nNicolas Dargazanli\nGuillaume Tritsch");
     fenAPropos.exec();
 }
 
@@ -108,7 +115,7 @@ void ChifoumiVue::jouerPapier() {
 
 void ChifoumiVue::reinitialiser() {
 
-    // Redefinir le bouton du timer en actif
+    // Relancer le timer
     if (!_laPresentation->timerIsActive()) {
         pause();
     }

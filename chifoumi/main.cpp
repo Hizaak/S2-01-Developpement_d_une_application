@@ -11,19 +11,25 @@
 #include "presentation.h"
 #include "modele.h"
 #include "connexionfen.h"
+#include "database.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+    // Ouverture de la base de donnée
+    Database * db = new Database();
+    db->openDataBase();
+
+    // Demande de connexion
     ConnexionFen * fenConnexion = new ConnexionFen();
     fenConnexion->exec();
 
     if (fenConnexion->getConnexionValidation()) {
         Chifoumi *m = new Chifoumi();
         // créer la présentation et lui associer le modèle
-        Presentation *p = new Presentation(m, fenConnexion->getDatabase());
+        Presentation *p = new Presentation(m);
         // créer la vue
         ChifoumiVue w(p);
         // associer la vue à la présentation

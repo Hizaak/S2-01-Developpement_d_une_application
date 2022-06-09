@@ -1,6 +1,5 @@
 #include "connexionfen.h"
 #include "ui_connexionfen.h"
-#include "database.h"
 #include "presentation.h"
 #include <QSqlQuery>
 #include <QSqlError>
@@ -11,10 +10,8 @@ ConnexionFen::ConnexionFen(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     this->setWindowTitle("Connexion au jeu du chifoumi");
-
-    db = new Database();
-    db->openDataBase();
 
     QSqlQuery query;
     query.exec("CREATE TABLE IF NOT EXISTS connexionChifoumiDMT (identifiant VARCHAR(45) PRIMARY KEY, motDePasse VARCHAR(90));");
@@ -30,10 +27,6 @@ ConnexionFen::ConnexionFen(QWidget *parent) :
 ConnexionFen::~ConnexionFen()
 {
     delete ui;
-}
-
-Database *ConnexionFen::getDatabase() {
-    return db;
 }
 
 void ConnexionFen::insertNewUser(QString pseudo, QString mdp) {
@@ -59,8 +52,6 @@ void ConnexionFen::connexion() {
     while (query.next()) {
         if (query.value(0).toString() == ui->lEIdentifiant->text() && query.value(1).toString() == ui->lEMDP->text()) {
             connexionReussie = true;
-            db->closeDataBase();
-            delete db;
             close();
             break;
         }
