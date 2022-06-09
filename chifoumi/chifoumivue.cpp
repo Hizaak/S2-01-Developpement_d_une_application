@@ -19,7 +19,7 @@ ChifoumiVue::ChifoumiVue(Presentation *p, QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->setWindowTitle("SAE 2.01 - version 2");
+    this->setWindowTitle("SAE 2.01 - version 4");
 
     // Ouverture et affichage des images des figures dans les boutons.
     ui->boutonCiseau->setIcon(ressourceCiseau);
@@ -36,6 +36,9 @@ ChifoumiVue::ChifoumiVue(Presentation *p, QWidget *parent)
     connect(ui->actionA_propos_de, SIGNAL(triggered()), this, SLOT(actionAPropos()));
 
     ui->boutonRejouer->setFocus();
+
+    ui->labelGagnant->hide();
+    ui->labelInfoJGagnant->hide();
 
     etatDuJeu = EtatsJeu::attenteLancementPartie;
 }
@@ -57,15 +60,17 @@ void ChifoumiVue::setPresentation (Presentation *p) {
 }
 
 // Affichage
-void ChifoumiVue::MAJInterface(char joueurGagnant,
+void ChifoumiVue::MAJInterface(char victoirePartie,
+                               char joueurGagnantRound,
                                Chifoumi::UnCoup coupJGauche,
                                Chifoumi::UnCoup coupJDroit,
                                unsigned int scoreJGauche,
                                unsigned int scoreJDroit)
 {
-    afficherGagnant(joueurGagnant);
+    afficherGagnantRound(joueurGagnantRound);
     afficherPoint(scoreJGauche, scoreJDroit);
     afficherCoup(coupJGauche, coupJDroit);
+    afficherGagnantTotal(victoirePartie);
 }
 
 /// ================== SLOTS PRIVEE ==================
@@ -73,7 +78,7 @@ void ChifoumiVue::MAJInterface(char joueurGagnant,
 void ChifoumiVue::actionAPropos() {
     QMessageBox fenAPropos;
     fenAPropos.setWindowTitle("À propos");
-    fenAPropos.setText("Version v3 du 24/05/2022\n\nFait par :\nAlexandre Maurice\nNicolas Dargazanli\nGuillaume Tritsch");
+    fenAPropos.setText("Version v4 du 24/05/2022\n\nFait par :\nAlexandre Maurice\nNicolas Dargazanli\nGuillaume Tritsch");
     fenAPropos.exec();
 }
 
@@ -97,7 +102,6 @@ void ChifoumiVue::reinitialiser() {
     case EtatsJeu::attenteCoupJoueur:
         majCouleur("neutre", "neutre");
 
-        ui->labelInfoJGagnant->setText("Aucun");
         break;
 
     case EtatsJeu::attenteLancementPartie:
@@ -108,28 +112,86 @@ void ChifoumiVue::reinitialiser() {
 
         majCouleur("neutre", "neutre");
 
-        ui->labelInfoJGagnant->setText("Aucun");
 
         etatDuJeu = EtatsJeu::attenteCoupJoueur;
         break;
+
+    case EtatsJeu::finDePartie:
+        ui->boutonCiseau->setEnabled(true);
+        ui->boutonPierre->setEnabled(true);
+        ui->boutonPapier->setEnabled(true);
+
+        ui->labelGagnant->hide();
+        ui->labelInfoJGagnant->hide();
+
+        majCouleur("neutre", "neutre");
+
+        etatDuJeu = EtatsJeu::attenteCoupJoueur;
+        break;
+
     }
 }
 
 /// ================== METHODES PRIVEES ==================
 
-void ChifoumiVue::afficherGagnant(char joueurGagnant) {
-    switch (joueurGagnant) {
+void ChifoumiVue::afficherGagnantRound(char joueurGagnantRound) {
+
+    switch (joueurGagnantRound) {
     case 'J':
-        ui->labelInfoJGagnant->setText("Joueur");
         majCouleur("true", "false");
         break;
     case 'M':
-        ui->labelInfoJGagnant->setText("Machine");
         majCouleur("false", "true");
         break;
     case 'N':
-        ui->labelInfoJGagnant->setText("Nul");
         majCouleur("false", "false");
+        break;
+    }
+}
+
+void ChifoumiVue::afficherFenetreVictoire(QString nomGagnant) {
+    QMessageBox FenVictoire;
+    FenVictoire.setWindowTitle("Victoire !");
+    FenVictoire.setText("Bravo, " + nomGagnant + " a gagné la partie");
+    FenVictoire.exec();
+}
+
+void ChifoumiVue::afficherGagnantTotal(char joueurGagnant) {
+
+    switch (joueurGagnant) {
+    case 'J':
+        ui->labelGagnant->show();
+        ui->labelInfoJGagnant->show();
+
+        ui->boutonCiseau->setEnabled(false);
+        ui->boutonPierre->setEnabled(false);
+        ui->boutonPapier->setEnabled(false);
+
+        ui->labelInfoJGagnant->setText("Joueur");
+
+        majCouleur("neutre", "neutre");
+
+        afficherFenetreVictoire("le Joueur");
+
+        etatDuJeu = EtatsJeu::finDePartie;
+        break;
+    case 'M':
+        ui->labelGagnant->show();
+        ui->labelInfoJGagnant->show();
+
+        ui->boutonCiseau->setEnabled(false);
+        ui->boutonPierre->setEnabled(false);
+        ui->boutonPapier->setEnabled(false);
+
+        ui->labelInfoJGagnant->setText("Machine");
+
+        majCouleur("neutre", "neutre");
+
+        afficherFenetreVictoire("la Machine");
+
+        etatDuJeu = EtatsJeu::finDePartie;
+        break;
+    case 'N':
         break;
     }
 }

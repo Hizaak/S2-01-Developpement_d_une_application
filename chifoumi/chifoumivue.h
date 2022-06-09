@@ -21,7 +21,8 @@ public:
 
     // METHODES
 
-    void MAJInterface(char joueurGagnant,
+    void MAJInterface(char victoirePartie,
+                      char joueurGagnantRound,
                       Chifoumi::UnCoup coupJGauche,
                       Chifoumi::UnCoup coupJDroit,
                       unsigned int scoreJGauche,
@@ -55,10 +56,11 @@ private slots:
     void actionAPropos() ;
 
 
+
 private:
 
     // NOUVEAUX TYPES
-    enum EtatsJeu {attenteLancementPartie, attenteCoupJoueur};
+    enum EtatsJeu {attenteLancementPartie, attenteCoupJoueur, finDePartie};
 
     // ATTRIBUTS
     Ui::ChifoumiVue *ui;
@@ -74,9 +76,14 @@ private:
 
     // METHODES
 
-    void afficherGagnant(char joueurGagnant);
+    void afficherGagnantTotal(char joueurGagnant);
     /*
      * BUT: Affiche au centre de l'écran le gagnant du precedent tour.
+     */
+
+    void afficherGagnantRound(char joueurGagnant);
+    /*
+     * BUT: Mise a jou des couleurs de chaque joueur
      */
 
     void afficherPoint(unsigned int jGauche, unsigned int jDroit);
@@ -98,6 +105,8 @@ private:
     /*
      * BUT: determine le pixmap à utiliser à l'affichage en fonction du parametre UnCoup passé en parametre.
      */
+
+    void afficherFenetreVictoire(QString);
 
 };
 #endif // CHIFOUMIVUE_H
